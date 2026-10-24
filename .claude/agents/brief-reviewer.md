@@ -45,6 +45,15 @@ No story may appear twice.
 
 **BLOCKER** if the same event has two entries. **MAJOR** if a merged entry omits one of its contributing sources.
 
+Then check repetition **across layers**, which is the failure that survives story-level deduplication. A fact must appear in exactly one place in the document. Flag each of these:
+
+- A conflict or caution block near the top that states figures also stated in their entries.
+- A source scorecard or closing section that re-lists stories already covered above.
+- A closing scope note that restates counts given in the introduction.
+- One technique or topic split across two sections as two entries.
+
+**MAJOR** for each layer that repeats content stated elsewhere.
+
 ### Gate 3 — Attribution and copyright
 
 - Every factual claim must trace to a named source with a date.
@@ -75,6 +84,10 @@ This is the gate that matters most. Check specifics against the sources.
 - Flag any specific that is more precise in the draft than in the source. A source that says "more than 1,000" does not support a draft that says "1,047".
 
 **BLOCKER** for any specific not traceable to a source. **BLOCKER** for precision the source does not support.
+
+Distinguish two causes, because the caller fixes them differently. When a specific is absent from the manifest but the story's `url` is present, say so in the finding: write `cause: manifest or draft — url available`. When the manifest carries full extraction text for that story and the specific still is not there, write `cause: draft`. You are not required to resolve which it is; naming the ambiguity is enough, and it stops the caller rewriting correct prose to match an incomplete manifest.
+
+If more than a quarter of your Gate 5 findings carry `cause: manifest or draft`, say so in one line under VERIFIED. That pattern means the manifest was written from memory rather than from saved extractions, and the whole pass is weak evidence.
 
 ### Gate 6 — Language (ASD-STE100)
 
