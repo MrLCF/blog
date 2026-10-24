@@ -3,12 +3,12 @@ title: "Week 43 Security Brief"
 description: "Three security sources for 19 to 24 October 2026, merged into one record. Each story appears once."
 date: 2026-10-24
 tags: ["security brief", "identity", "ai security", "supply chain"]
-draft: true
+draft: false
 ---
 
 This brief merges three sources for the week of 19 to 24 October 2026. Each story appears one time only. Where more than one source covered a story, the entry carries the facts from all of them.
 
-The sources are Dark Reading (29 articles), CISO Series Cybersecurity Headlines (5 issues) and RockCyber Musings (2 posts). That is 36 published items and 62 unique stories. Eleven stories appeared in more than one source.
+The sources are Dark Reading (29 articles), CISO Series Cybersecurity Headlines (5 issues) and RockCyber Musings (2 posts). That is 36 published items. A newsletter issue carries many stories, so the three sources together give 82 story records: 29 from Dark Reading, 41 from CISO Series and 12 from RockCyber. Twenty of those records merge into eleven shared entries. That leaves 62 unique stories.
 
 The brief uses ASD-STE100 Simplified Technical English. Sentences are short. The voice is active. Each technical term has a definition at its first use.
 
@@ -23,8 +23,8 @@ The brief uses ASD-STE100 Simplified Technical English. Sentences are short. The
 Check these four points before you use a number in your own work.
 
 - **PHP2Shell severity.** Dark Reading gives both flaws a CVSS score of 9.2. CISO Series says the flaws are rated 9.2 and 10. Use 9.2 until the official advisory confirms the second score.
-- **ConnectWise scale.** Huntress saw sign-in attempts in more than 1,000 tenants, with more than 300 successes. Microsoft says the group tried more than 2,250 tenants. Todyl says you must treat every tenant with the application as compromised. The three numbers measure different things.
-- **Jobs report growth.** Dark Reading says AI security engineer postings increased 268.3 percent. CISO Series says AI Security Engineer and Cyber Data Scientist together increased 203.5 percent. Both cite the same CyberSN report.
+- **ConnectWise scale.** The two figures given for Huntress do not agree. Dark Reading reports sign-in attempts in more than 1,000 tenants, with more than 300 successes. RockCyber reports Huntress confirming unauthorized sign-ins in 162 tenants. Microsoft separately says the group attempted more than 2,250 tenants, and Todyl says you must treat every tenant with the application installed as compromised. Attach the attribution to whichever figure you use.
+- **Jobs report growth.** RockCyber says AI security engineer postings increased 268.3 percent. CISO Series says AI Security Engineer and Cyber Data Scientist together increased 203.5 percent. Both cite the same CyberSN report. Dark Reading did not cover it.
 - **AI attack cost.** Reuters and NorForge give approximately $50 for each successful intrusion. A separate campaign gives $25.46 for each completed target. These are two different campaigns. Do not combine the figures.
 
 ---
@@ -144,10 +144,14 @@ Attackers bundle the genuine, signed Siemens Software Center program with malici
 
 **What happened.** OpenCode says attackers entered a legacy system on the night of 16 October. The breach exposed provider API keys stored by 1.4 percent of Console users, including Google, OpenAI and Anthropic keys. Some users report unauthorized charges up to $1,700 and suspended Google Cloud projects. Co-founder Dax Raad says the attackers used AI agents for at least 48 hours. He also says the AI models his team used for the analysis started to refuse, because the malicious code triggered safety filters. The team continued after it received vetted-defender access.
 
-**Why it matters.** The refusal problem is the lesson. A guardrail that cannot tell a responder from an attacker stops the responder. An attacker who runs an open-weight model never sees a refusal.
+Separately, Pillar Security disclosed a remote code execution flaw in OpenCode on 19 October. It affects versions 1.0.137 through 1.18.32 on Windows and WSL. A remote MCP server's OAuth address reached a PowerShell command unescaped. Anomaly repaired it in 1.18.33 on 28 September, with no CVE and no advisory.
+
+**Why it matters.** The refusal problem is the lesson. A guardrail that cannot tell a responder from an attacker stops the responder. An attacker who runs an open-weight model never sees a refusal. The second flaw matters for a different reason: no CVE exists, so your scanners will not flag the vulnerable builds.
 
 **What to do.**
 - Change any provider key that was ever stored in OpenCode Console.
+- Check your OpenCode version directly on Windows and WSL machines.
+- Ask your AI tooling suppliers, in writing, whether they file CVEs.
 - Test whether your own AI tooling will analyse malware before the day you need it.
 - Enrol your incident response team in a vetted defender programme now.
 
@@ -349,7 +353,7 @@ A TransUnion report shows that 53 percent of suspected digital fraud starts at t
 ## 8. Operational technology
 
 ### European grocery stores lost millions to refrigeration firmware
-*Awareness · DR CS · 21–22 October*
+*Act now · DR CS · 21–22 October*
 
 Attackers changed the refrigeration controls in more than 700 European grocery stores. Temperatures reached 50 degrees Celsius. The equipment comes from Danfoss and Copeland. The flaws are CVE-2025-41450, CVE-2025-41451 and CVE-2025-41452, all published before the attacks. The EU confirmed a gap: the Cyber Resilience Act requires manufacturers to report attacks on end-of-life products, but does not require them to repair the products.
 
@@ -364,9 +368,9 @@ Operational equipment produces a physical loss. The attacker does not need your 
 ## 9. Market, money and the profession
 
 ### The cybersecurity jobs market moves toward AI roles
-*Awareness · DR CS · 19 October*
+*Awareness · CS RC · 19–23 October*
 
-CyberSN published its October jobs report. It assesses the market by skills, not by job titles. US postings fell 26.4 percent year over year to 235,786 for January through September, a four-year low. Nine of ten job functions shrank. CISO postings fell 38.9 percent to 2,832, close to the 2,808 of 2024. AI security engineer and cyber data scientist postings grew sharply. The two sources give different growth figures. See the caution section above.
+CyberSN published its October jobs report. It assesses the market by skills, not by job titles. CISO Series reports the four-year low in postings and the skills-based method. RockCyber gives the detail: US postings fell 26.4 percent year over year to 235,786 for January through September. Nine of ten job functions shrank. CISO postings fell 38.9 percent to 2,832, close to the 2,808 of 2024. The two sources give different growth figures for the AI roles. See the caution section above.
 
 The CISO fall is a return to 2024 levels after a strong 2025. The growth figure deserves more attention. Section 4 of this brief needs a person who understands agent monitoring and incident response together. Cross-train two engineers on agent security this quarter. Write the role description now.
 
@@ -401,12 +405,12 @@ Six items give an argument or a product announcement, not an event. Read the las
 
 | Source | Items | Cadence | Unique value this week |
 |---|---|---|---|
-| Dark Reading | 29 articles | 4–5 each weekday | Depth on the stories it chose. Only source for AdFection, TiDB, OVHcloud and the insurance pieces. Four of the 29 were vendor announcements. |
-| CISO Series | 5 issues, ~38 stories | Each weekday | The widest sweep. Only source for the BeyondTrust zero-day, the GitLab flaw and the continued PAN-OS attacks. These are the three most relevant to identity and access work. |
-| RockCyber Musings | 2 posts | Tuesday and Friday | The only source for the METR monitoring audit, the MATS split-attack paper, the NIST agent incident practices and the bypass certificate pattern. |
+| Dark Reading | 29 articles, 29 stories | 4–5 each weekday | Depth on the stories it chose. Only source for AdFection, TiDB, OVHcloud and the insurance pieces. Four of the 29 were vendor announcements. |
+| CISO Series | 5 issues, 41 stories | Each weekday | The widest sweep. Only source for the BeyondTrust zero-day, the GitLab flaw and the continued PAN-OS attacks. These are the three most relevant to identity and access work. |
+| RockCyber Musings | 2 posts, 12 stories | Tuesday and Friday | The only source for the METR monitoring audit, the MATS split-attack paper, the NIST agent incident practices and the bypass certificate pattern. |
 
-Two source errors are worth recording. Dark Reading published the European grocery story twice, in English on 15 October and in French on 22 October. RockCyber's issue numbers jump from 54 to 57, which the author explains as a copy-and-paste error carried forward.
+Three source errors are worth recording. Dark Reading published the European grocery story twice, in English on 15 October and in French on 22 October. CISO Series ran the Cairn story twice on 21 October, once in each of that day's two issues. RockCyber's issue numbers jump from 54 to 57, which the author explains as a copy-and-paste error carried forward.
 
 ---
 
-*Scope: 36 published items from three sources, 19 to 24 October 2026. Eleven stories appeared in more than one source and are merged here into single entries. The facts belong to the named publications and their writers. This brief gives summaries, not reproductions.*
+*Scope: 36 published items from three sources, 19 to 24 October 2026, carrying 82 story records. Twenty records merge into eleven shared entries, which leaves 62 unique stories. The facts belong to the named publications and their writers, and the links go to the originals.*
