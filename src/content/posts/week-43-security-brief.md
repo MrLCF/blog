@@ -2,7 +2,7 @@
 title: "Week 43 Security Brief"
 description: "Three security sources for 19 to 24 October 2026, merged into one record. Each story appears once."
 date: 2026-10-24
-tags: ["security brief", "identity", "ai security", "supply chain"]
+tags: ["News", "security brief", "identity", "ai security", "supply chain", "vulnerabilities", "week 43"]
 draft: false
 ---
 
