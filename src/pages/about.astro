@@ -1,0 +1,47 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE } from '../site.config';
+---
+
+<Base title="About" description={`About ${SITE.author}: a decade in technology, building solutions and driving enterprise transformations.`}>
+  <header>
+    <div class="kicker">About</div>
+    <h1>A career is a nuanced response to the situations we're placed in.</h1>
+    <p class="dek">The people, the technology, the macro forces, and the internal metamorphosis.</p>
+  </header>
+  <div class="prose no-dropcap">
+    <p>
+      I'm Lysander. I've spent a decade in technology, building solutions and driving enterprise transformations. This
+      blog is where I share my views on tech and my experiments with the big-small and small-big problems along the way.
+    </p>
+    <p>
+      Writing about the journey is my attempt to make it more meaningful, and perhaps to help a few fellow travellers
+      along the way.
+    </p>
+    <p>Read along, and have fun.</p>
+  </div>
+</Base>
+
+<style>
+  header {
+    padding: 3.5rem 0 2rem;
+    margin-bottom: 2.5rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  h1 {
+    font-size: clamp(1.9rem, 5.5vw, 2.6rem);
+    font-weight: 500;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    margin: 0.4rem 0 1rem;
+  }
+
+  .dek {
+    font-size: 1.3rem;
+    line-height: 1.5;
+    font-style: italic;
+    color: var(--muted);
+    margin: 0;
+  }
+</style>

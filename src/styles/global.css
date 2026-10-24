@@ -1,0 +1,217 @@
+:root {
+  --paper: #faf7f0;
+  --ink: #2c2c2a;
+  --ink-soft: #444441;
+  --muted: #5f5e5a;
+  --faint: #888780;
+  --rule: #d3d1c7;
+  --accent: #993c1d;
+  --code-bg: #f1efe8;
+
+  --serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+  --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --mono: ui-monospace, 'SF Mono', Menlo, monospace;
+
+  --measure: 40rem;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #1c1b19;
+    --ink: #ece9e1;
+    --ink-soft: #d3d1c7;
+    --muted: #b4b2a9;
+    --faint: #888780;
+    --rule: #3a3936;
+    --accent: #f0997b;
+    --code-bg: #262522;
+    color-scheme: dark;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 1.1875rem;
+  line-height: 1.65;
+  font-optical-sizing: auto;
+  text-rendering: optimizeLegibility;
+}
+
+.wrap {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+a {
+  color: inherit;
+  text-decoration-color: var(--rule);
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 1px;
+  transition: text-decoration-color 0.15s;
+}
+
+a:hover {
+  text-decoration-color: var(--accent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Small caps-style kicker used for dates and labels */
+.kicker {
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.meta {
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  color: var(--faint);
+}
+
+/* ---------- Article prose ---------- */
+.prose {
+  color: var(--ink-soft);
+}
+
+.prose > * {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.prose > * + * {
+  margin-top: 1.25em;
+}
+
+.prose:not(.no-dropcap) > p:first-of-type::first-letter {
+  float: left;
+  font-size: 3.6em;
+  line-height: 0.9;
+  padding: 0.06em 0.1em 0 0;
+  color: var(--ink);
+}
+
+.prose h2,
+.prose h3 {
+  color: var(--ink);
+  font-weight: 500;
+  line-height: 1.25;
+  margin: 2.2em 0 0;
+}
+
+.prose h2 {
+  font-size: 1.55rem;
+}
+
+.prose h3 {
+  font-size: 1.25rem;
+}
+
+.prose blockquote {
+  margin: 1.8em 0;
+  padding: 0 0 0 1.25rem;
+  border-left: 2px solid var(--accent);
+  font-style: italic;
+  font-size: 1.2rem;
+  color: var(--ink);
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 1.3em;
+}
+
+.prose li + li {
+  margin-top: 0.4em;
+}
+
+.prose hr {
+  border: 0;
+  text-align: center;
+  margin: 2.5em 0;
+}
+
+.prose hr::after {
+  content: '\2022\2003\2022\2003\2022';
+  color: var(--faint);
+}
+
+.prose img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 2em auto;
+}
+
+.prose code {
+  font-family: var(--mono);
+  font-size: 0.85em;
+  background: var(--code-bg);
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+}
+
+.prose pre {
+  font-size: 0.85rem;
+  line-height: 1.55;
+  padding: 1rem 1.15rem;
+  border-radius: 6px;
+  overflow-x: auto;
+  background: var(--code-bg) !important;
+}
+
+.prose pre code {
+  background: none;
+  padding: 0;
+  font-size: inherit;
+}
+
+@media (prefers-color-scheme: dark) {
+  .astro-code,
+  .astro-code span {
+    color: var(--shiki-dark) !important;
+    font-style: var(--shiki-dark-font-style) !important;
+  }
+}
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--sans);
+  font-size: 0.9rem;
+}
+
+.prose th,
+.prose td {
+  text-align: left;
+  padding: 0.5em 0.75em 0.5em 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+@media (max-width: 600px) {
+  body {
+    font-size: 1.0625rem;
+  }
+}

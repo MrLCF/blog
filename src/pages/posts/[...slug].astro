@@ -1,0 +1,136 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
+import { getPosts, readingTime, type Post } from '../../utils';
+import { SITE, url } from '../../site.config';
+
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  return posts.map((post, i) => ({
+    params: { slug: post.id },
+    props: { post, newer: posts[i - 1], older: posts[i + 1] },
+  }));
+}
+
+interface Props {
+  post: Post;
+  newer?: Post;
+  older?: Post;
+}
+
+const { post, newer, older } = Astro.props;
+const { Content } = await render(post);
+---
+
+<Base title={post.data.title} description={post.data.description} type="article">
+  <article>
+    <header>
+      <div class="kicker">
+        <FormattedDate date={post.data.date} />
+        {post.data.draft && <span class="draft">Draft</span>}
+      </div>
+      <h1>{post.data.title}</h1>
+      <p class="dek">{post.data.description}</p>
+      <p class="meta">
+        By {SITE.author} · {readingTime(post.body)}
+        {post.data.tags.length > 0 && <> · {post.data.tags.join(', ')}</>}
+      </p>
+    </header>
+
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+
+  <nav class="pager" aria-label="More essays">
+    {
+      older ? (
+        <a href={url(`/posts/${older.id}/`)}>
+          <span class="meta">← Older</span>
+          {older.data.title}
+        </a>
+      ) : (
+        <span />
+      )
+    }
+    {
+      newer && (
+        <a class="next" href={url(`/posts/${newer.id}/`)}>
+          <span class="meta">Newer →</span>
+          {newer.data.title}
+        </a>
+      )
+    }
+  </nav>
+</Base>
+
+<style>
+  header {
+    padding: 3.5rem 0 2rem;
+    margin-bottom: 2.5rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  h1 {
+    font-size: clamp(2rem, 6vw, 2.75rem);
+    font-weight: 500;
+    line-height: 1.12;
+    letter-spacing: -0.015em;
+    margin: 0.4rem 0 1rem;
+  }
+
+  .dek {
+    font-size: 1.3rem;
+    line-height: 1.5;
+    font-style: italic;
+    color: var(--muted);
+    margin: 0 0 1rem;
+  }
+
+  .meta {
+    margin: 0;
+  }
+
+  .draft {
+    margin-left: 0.75rem;
+    padding: 0.1rem 0.45rem;
+    border: 1px solid var(--accent);
+    border-radius: 3px;
+  }
+
+  .pager {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 4rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--ink);
+  }
+
+  .pager a {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    text-decoration: none;
+    line-height: 1.35;
+  }
+
+  .pager a:hover {
+    color: var(--accent);
+  }
+
+  .pager .next {
+    text-align: right;
+  }
+
+  @media (max-width: 520px) {
+    .pager {
+      grid-template-columns: 1fr;
+    }
+
+    .pager .next {
+      text-align: left;
+    }
+  }
+</style>

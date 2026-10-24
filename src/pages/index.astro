@@ -1,0 +1,138 @@
+---
+import Base from '../layouts/Base.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import { getPosts, readingTime } from '../utils';
+import { url } from '../site.config';
+
+const [lead, ...rest] = await getPosts();
+---
+
+<Base>
+  {
+    !lead && (
+      <div class="empty">
+        <div class="kicker">Coming soon</div>
+        <p class="dek">The first essay is on its way.</p>
+      </div>
+    )
+  }
+
+  {
+    lead && (
+      <article class="lead">
+        <div class="kicker">
+          <FormattedDate date={lead.data.date} />
+        </div>
+        <h1>
+          <a href={url(`/posts/${lead.id}/`)}>{lead.data.title}</a>
+        </h1>
+        <p class="dek">{lead.data.description}</p>
+        <p class="meta">
+          {readingTime(lead.body)} · <a href={url(`/posts/${lead.id}/`)}>Read the essay →</a>
+        </p>
+      </article>
+    )
+  }
+
+  {
+    rest.length > 0 && (
+      <section aria-labelledby="archive">
+        <h2 id="archive" class="kicker">
+          Earlier essays
+        </h2>
+        <ol class="archive">
+          {rest.map((post) => (
+            <li>
+              <a href={url(`/posts/${post.id}/`)}>{post.data.title}</a>
+              <span class="meta">
+                <FormattedDate date={post.data.date} />
+              </span>
+            </li>
+          ))}
+        </ol>
+      </section>
+    )
+  }
+</Base>
+
+<style>
+  .empty {
+    padding: 4rem 0;
+  }
+
+  .empty .dek {
+    margin-top: 0.5rem;
+  }
+
+  .lead {
+    padding: 3.5rem 0 3rem;
+  }
+
+  .lead h1 {
+    font-size: clamp(2rem, 6vw, 2.9rem);
+    font-weight: 500;
+    line-height: 1.12;
+    letter-spacing: -0.015em;
+    margin: 0.4rem 0 1rem;
+  }
+
+  .lead h1 a {
+    text-decoration: none;
+  }
+
+  .dek {
+    font-size: 1.3rem;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    margin: 0 0 1.25rem;
+  }
+
+  .meta a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  section {
+    border-top: 1px solid var(--rule);
+    padding-top: 1.75rem;
+  }
+
+  section h2 {
+    margin: 0 0 0.5rem;
+  }
+
+  .archive {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .archive li {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 0.9rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .archive a {
+    text-decoration: none;
+    font-size: 1.15rem;
+  }
+
+  .archive a:hover {
+    color: var(--accent);
+  }
+
+  .archive .meta {
+    white-space: nowrap;
+  }
+
+  @media (max-width: 520px) {
+    .archive li {
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+  }
+</style>

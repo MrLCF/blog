@@ -1,0 +1,12 @@
+---
+import Base from '../layouts/Base.astro';
+import { url } from '../site.config';
+---
+
+<Base title="Page not found">
+  <div style="padding: 5rem 0; text-align: center;">
+    <div class="kicker">404</div>
+    <h1 style="font-weight: 500; font-size: 2.2rem; margin: 0.5rem 0 1rem;">This page has gone missing.</h1>
+    <p><a href={url('/')}>Back to the essays</a></p>
+  </div>
+</Base>
